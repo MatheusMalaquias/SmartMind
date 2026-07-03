@@ -353,8 +353,8 @@ function onScroll(){
   const prP=sL(2.5,4.5);
   const trP=sL(4.5,6.5);
   const prD=sL(6.5,8.5);
-  const chP=sL(8.5,10.5);
-  const ctP=sL(10.5,12.5);
+  const chP=sL(8.5,10.0); // Adjusted earlier
+  const ctP=sL(10.0,11.5); // Adjusted earlier
 
   // Header
   const hdrVis=sy<50||ctP>.05;
