@@ -420,6 +420,29 @@ function onScroll(){
   // ── SCENE 6: CTA ──
   const cti=document.getElementById('cta-inner');
   if(ctP>.05)cti.classList.add('show','from-bottom');else cti.classList.remove('show');
+
+  // ── NAV DOTS ──
+  let activeIdx = 0;
+  if (sy >= 10.2 * VH) activeIdx = 5;
+  else if (sy >= 8.2 * VH) activeIdx = 4;
+  else if (sy >= 6.2 * VH) activeIdx = 3;
+  else if (sy >= 4.2 * VH) activeIdx = 2;
+  else if (sy >= 2.2 * VH) activeIdx = 1;
+
+  const dots = document.querySelectorAll('.nav-dot');
+  if(dots.length) {
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIdx));
+  }
+}
+
+// ══════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════
+function goToScene(idx) {
+  const tracks = document.querySelectorAll('.scene-track');
+  if (tracks[idx]) {
+    tracks[idx].scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 // ══════════════════════════════════

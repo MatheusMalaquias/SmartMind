@@ -7,6 +7,7 @@
 <meta name="description" content="Agentes de WhatsApp, automações de processo e integrações inteligentes — construídos para o seu negócio em dias, não meses.">
 <meta property="og:title" content="Synaptech — AI Automation">
 <meta property="og:description" content="Automatizamos o trabalho que sua equipe não deveria estar fazendo.">
+<meta property="og:image" content="images/og-cover.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -31,16 +32,37 @@
 <canvas id="mouse-canvas" aria-hidden="true"></canvas>
 <div id="progress-bar"></div>
 
-<!-- HEADER: only lang switcher -->
+<!-- HEADER com logo + lang switcher -->
 <header id="header">
-  <button class="lang-btn active" onclick="setLang('pt')" id="btn-pt">🇧🇷 PT</button>
-  <button class="lang-btn" onclick="setLang('en')" id="btn-en">🇺🇸 EN</button>
+  <div class="logo-mark">
+    <span class="logo-dot"></span>
+    SYNAPTECH
+  </div>
+  <div class="header-right">
+    <button class="lang-btn active" onclick="setLang('pt')" id="btn-pt">🇧🇷 PT</button>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">🇺🇸 EN</button>
+  </div>
 </header>
+
+<!-- NAV DOTS lateral -->
+<nav id="nav-dots" aria-label="Navegação por seções">
+  <div class="nav-dot active" data-scene="0" data-label="Início" onclick="goToScene(0)"></div>
+  <div class="nav-dot" data-scene="1" data-label="Problema" onclick="goToScene(1)"></div>
+  <div class="nav-dot" data-scene="2" data-label="Solução" onclick="goToScene(2)"></div>
+  <div class="nav-dot" data-scene="3" data-label="Produtos" onclick="goToScene(3)"></div>
+  <div class="nav-dot" data-scene="4" data-label="Demo" onclick="goToScene(4)"></div>
+  <div class="nav-dot" data-scene="5" data-label="Contato" onclick="goToScene(5)"></div>
+</nav>
+
+<!-- BOTÃO WHATSAPP FLUTUANTE -->
+<a id="wpp-btn" href="https://wa.me/5532999999999?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20Synaptech" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">
+  💬
+</a>
 
 <div id="scroll-root">
 
   <!-- SCENE 1: ENTRY (250vh) -->
-  <div class="scene-track tall">
+  <div class="scene-track tall" data-scene-idx="0">
     <div class="scene-sticky" id="scene-entry">
       <div id="entry-overlay"></div>
       <!-- Big name -->
@@ -62,7 +84,7 @@
   </div>
 
   <!-- SCENE 2: PROBLEM (200vh) -->
-  <div class="scene-track">
+  <div class="scene-track" data-scene-idx="1">
     <div class="scene-sticky">
       <div class="scene-inner from-bottom" id="prob-inner">
         <div class="scene-content" id="prob-content">
@@ -75,7 +97,7 @@
   </div>
 
   <!-- SCENE 3: TRANSFORMATION (200vh) -->
-  <div class="scene-track">
+  <div class="scene-track" data-scene-idx="2">
     <div class="scene-sticky">
       <div class="scene-inner from-scale" id="trans-inner">
         <div class="scene-content" id="trans-content">
@@ -91,7 +113,7 @@
   </div>
 
   <!-- SCENE 4: PRODUCTS (200vh) -->
-  <div class="scene-track">
+  <div class="scene-track" data-scene-idx="3">
     <div class="scene-sticky">
       <div class="scene-inner" id="prod-inner">
         <div class="scene-content" id="prod-content">
@@ -104,7 +126,7 @@
   </div>
 
   <!-- SCENE 5: CHAT (200vh) -->
-  <div class="scene-track">
+  <div class="scene-track" data-scene-idx="4">
     <div class="scene-sticky">
       <div class="scene-inner from-bottom" id="chat-inner">
         <div class="scene-content" style="padding:1.5rem">
@@ -128,7 +150,7 @@
   </div>
 
   <!-- SCENE 6: CTA (250vh) -->
-  <div class="scene-track tall">
+  <div class="scene-track tall" data-scene-idx="5">
     <div class="scene-sticky">
       <div class="scene-inner from-bottom" id="cta-inner">
         <div class="scene-content" id="cta-content">
@@ -137,11 +159,11 @@
           <div class="form-box" id="form-box">
             <div class="field">
               <label id="lbl-name"></label>
-              <input type="text" id="inp-name" placeholder="">
+              <input type="text" id="inp-name" placeholder="" autocomplete="name">
             </div>
             <div class="field">
               <label id="lbl-wpp"></label>
-              <input type="tel" id="inp-wpp" placeholder="+55 11 99999-9999">
+              <input type="tel" id="inp-wpp" placeholder="+55 32 99999-9999" autocomplete="tel">
             </div>
             <div class="field">
               <label id="lbl-need"></label>
