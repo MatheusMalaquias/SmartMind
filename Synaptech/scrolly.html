@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synaptech — Automatizamos o Trabalho Que Sua Equipe Não Deveria Estar Fazendo</title>
+<meta name="description" content="Agentes de WhatsApp, automações de processo e integrações inteligentes — construídos para o seu negócio em dias, não meses.">
+<meta property="og:title" content="Synaptech — AI Automation">
+<meta property="og:description" content="Automatizamos o trabalho que sua equipe não deveria estar fazendo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- META PIXEL — cole seu ID abaixo -->
+<!--
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','SEU_PIXEL_ID');
+  fbq('track','PageView');
+</script>
+-->
+
+  <link rel="stylesheet" href="scrolly.css">
+</head>
+<body>
+
+<canvas id="graph-canvas" aria-hidden="true"></canvas>
+<canvas id="mouse-canvas" aria-hidden="true"></canvas>
+<div id="progress-bar"></div>
+
+<!-- HEADER: only lang switcher -->
+<header id="header">
+  <button class="lang-btn active" onclick="setLang('pt')" id="btn-pt">🇧🇷 PT</button>
+  <button class="lang-btn" onclick="setLang('en')" id="btn-en">🇺🇸 EN</button>
+</header>
+
+<div id="scroll-root">
+
+  <!-- SCENE 1: ENTRY (250vh) -->
+  <div class="scene-track tall">
+    <div class="scene-sticky" id="scene-entry">
+      <div id="entry-overlay"></div>
+      <!-- Big name -->
+      <div id="name-block">
+        <div id="name-text">SYNAPTECH</div>
+      </div>
+      <!-- Narrative -->
+      <div id="narrative" class="scene-content">
+        <div class="eyebrow">
+          <span class="dot-pulse"></span>
+          <span id="active-label">Sistemas Ativos</span>
+        </div>
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <p id="line3"></p>
+        <div id="scroll-hint"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 2: PROBLEM (200vh) -->
+  <div class="scene-track">
+    <div class="scene-sticky">
+      <div class="scene-inner from-bottom" id="prob-inner">
+        <div class="scene-content" id="prob-content">
+          <h2 id="prob-title"></h2>
+          <div id="prob-items"></div>
+          <div id="prob-end"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 3: TRANSFORMATION (200vh) -->
+  <div class="scene-track">
+    <div class="scene-sticky">
+      <div class="scene-inner from-scale" id="trans-inner">
+        <div class="scene-content" id="trans-content">
+          <h2><span id="trans-line1"></span><br><span class="grad" id="trans-line2"></span></h2>
+          <div class="stats-grid">
+            <div class="stat-item"><div class="stat-num" id="s1">0</div><div class="stat-lbl" id="s1l"></div></div>
+            <div class="stat-item"><div class="stat-num" id="s2">0</div><div class="stat-lbl" id="s2l"></div></div>
+            <div class="stat-item"><div class="stat-num" id="s3">0</div><div class="stat-lbl" id="s3l"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 4: PRODUCTS (200vh) -->
+  <div class="scene-track">
+    <div class="scene-sticky">
+      <div class="scene-inner" id="prod-inner">
+        <div class="scene-content" id="prod-content">
+          <h2 id="prod-title"></h2>
+          <div class="prod-grid" id="prod-grid"></div>
+          <div class="prod-hint" id="prod-hint"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 5: CHAT (200vh) -->
+  <div class="scene-track">
+    <div class="scene-sticky">
+      <div class="scene-inner from-bottom" id="chat-inner">
+        <div class="scene-content" style="padding:1.5rem">
+          <div id="chat-content">
+            <div id="chat-copy">
+              <h2 id="chat-title"></h2>
+              <p id="chat-desc"></p>
+              <div id="chat-checks"></div>
+            </div>
+            <div class="chat-win">
+              <div class="chat-hdr">
+                <span class="status-dot"></span>
+                <span id="chat-hdr-text">ClinicBot · Online</span>
+              </div>
+              <div class="chat-body" id="chat-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 6: CTA (250vh) -->
+  <div class="scene-track tall">
+    <div class="scene-sticky">
+      <div class="scene-inner from-bottom" id="cta-inner">
+        <div class="scene-content" id="cta-content">
+          <h2 id="cta-title"></h2>
+          <p id="cta-sub"></p>
+          <div class="form-box" id="form-box">
+            <div class="field">
+              <label id="lbl-name"></label>
+              <input type="text" id="inp-name" placeholder="">
+            </div>
+            <div class="field">
+              <label id="lbl-wpp"></label>
+              <input type="tel" id="inp-wpp" placeholder="+55 11 99999-9999">
+            </div>
+            <div class="field">
+              <label id="lbl-need"></label>
+              <select id="inp-need" onchange="this.classList.add('has-value')">
+                <option value=""></option>
+              </select>
+            </div>
+            <button id="submit-btn" onclick="submitForm()"></button>
+            <div class="form-disc" id="form-disc"></div>
+          </div>
+          <div class="success-box" id="success-box">
+            <div style="font-size:2.5rem">✅</div>
+            <h3 id="suc-title"></h3>
+            <p id="suc-sub"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p id="footer-txt"></p>
+  </footer>
+</div>
+
+<script src="scrolly.js"></script>
+</body>
+</html>
