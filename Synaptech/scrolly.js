@@ -33,15 +33,15 @@ const T = {
     ctat:"Você chegou até aqui.",
     ctas:"Sua empresa já poderia estar automatizada. Dá o primeiro passo.",
     fn:"Nome *",fw:"WhatsApp *",fq:"O que você precisa?",fsel:"Selecione",
-    opts:["🤖 Agente de WhatsApp","⚙️ Automação de processo","🔗 Integração de sistemas","📊 Inteligência de dados","💡 Quero conversar"],
+    opts:["📊 Lançamento de Vendas","💬 Agente de WhatsApp","📋 Relatórios de Equipe","💡 Quero um projeto sob medida"],
     fbtn:"Quero uma Proposta Gratuita",fdis:"Sem spam. Resposta em até 1 dia útil.",
     ot:"Recebido.",os:"Retornamos com uma proposta em até 1 dia útil.",
     foot:"© "+new Date().getFullYear()+" Synaptech | AI Automation & Business Intelligence | Matheus O. Malaquias",
     pl:[
-      {icon:"📊",name:"SalesSync",  color:"#C4B5FD",glow:"rgba(124,58,237,.4)", bg:"rgba(124,58,237,.12)",border:"rgba(124,58,237,.35)",dot:"#9F67FF",short:"Notas de venda automáticas",  desc:"A cada venda fechada, registra automaticamente no seu sistema. Sua equipe para de digitar e começa a vender mais.",result:"−15min por venda",       tech:"n8n · CRM · API"},
-      {icon:"🏥",name:"ClinicBot",  color:"#67E8F9",glow:"rgba(6,182,212,.38)",bg:"rgba(6,182,212,.1)",  border:"rgba(6,182,212,.3)", dot:"#06B6D4",short:"Agente WhatsApp 24/7",       desc:"Atende pacientes no WhatsApp a qualquer hora — agenda, confirma e envia lembrete automático.",              result:"24/7 sem recepcionista",tech:"WhatsApp API · Claude AI · n8n"},
-      {icon:"🔧",name:"FieldBot",   color:"#86efac",glow:"rgba(34,197,94,.32)", bg:"rgba(34,197,94,.08)",border:"rgba(34,197,94,.25)",  dot:"#22c55e",short:"Agendamento de visitas",    desc:"Recebe pedido, qualifica o serviço, verifica disponibilidade e confirma. Tudo automaticamente.",             result:"3min do pedido ao calendário",tech:"WhatsApp API · n8n · Calendar"},
-      {icon:"💡",name:"Seu Projeto",color:"#fde68a",glow:"rgba(251,191,36,.25)",bg:"rgba(251,191,36,.08)",border:"rgba(251,191,36,.22)",dot:"#fbbf24",short:"Solução sob medida",       desc:"Tem outro problema? A gente projeta uma solução do zero para o seu processo específico.",                    result:"Diagnóstico gratuito",    tech:"Stack personalizado"},
+      {icon:"📊",name:"VendaSync",   color:"#C4B5FD",glow:"rgba(124,58,237,.4)", bg:"rgba(124,58,237,.12)",border:"rgba(124,58,237,.35)",dot:"#9F67FF",short:"Lançamento de Vendas",   desc:"A cada venda fechada, lança a nota automaticamente no seu sistema. Fim do trabalho manual.",result:"−15min por venda",       tech:"n8n · CRM · ERP"},
+      {icon:"💬",name:"SmartBot",    color:"#67E8F9",glow:"rgba(6,182,212,.38)",bg:"rgba(6,182,212,.1)",  border:"rgba(6,182,212,.3)", dot:"#06B6D4",short:"Agente de WhatsApp",     desc:"Atendimento 24 horas inteligente. Qualifica leads, agenda reuniões e tira dúvidas.",              result:"24/7 sem descanso",tech:"WhatsApp API · Claude AI · n8n"},
+      {icon:"📋",name:"TeamReport",  color:"#86efac",glow:"rgba(34,197,94,.32)", bg:"rgba(34,197,94,.08)",border:"rgba(34,197,94,.25)",  dot:"#22c55e",short:"Relatórios de Equipe",    desc:"Busca dados de cada funcionário e gera relatórios gerenciais consolidados em segundos.",             result:"Gestão baseada em dados",tech:"APIs Internas · n8n · Claude"},
+      {icon:"💡",name:"Seu Projeto", color:"#fde68a",glow:"rgba(251,191,36,.25)",bg:"rgba(251,191,36,.08)",border:"rgba(251,191,36,.22)",dot:"#fbbf24",short:"Solução sob medida",       desc:"Tem outro gargalo? A gente projeta uma automação do zero para o seu processo específico.",                    result:"Diagnóstico gratuito",    tech:"Stack personalizado"},
     ],
   },
   en: {
@@ -70,15 +70,15 @@ const T = {
     ctat:"You made it here.",
     ctas:"Your business could already be automated. Take the first step.",
     fn:"Name *",fw:"WhatsApp *",fq:"What do you need?",fsel:"Select",
-    opts:["🤖 WhatsApp Agent","⚙️ Process Automation","🔗 System Integration","📊 Data Intelligence","💡 I want to talk"],
+    opts:["📊 Automatic Sales Posting","💬 WhatsApp Agent","📋 Employee Reports","💡 Custom Automation"],
     fbtn:"Get a Free Proposal",fdis:"No spam. Response within 1 business day.",
     ot:"Received.",os:"We'll come back with a proposal within 1 business day.",
     foot:"© "+new Date().getFullYear()+" Synaptech | AI Automation & Business Intelligence | Matheus O. Malaquias",
     pl:[
-      {icon:"📊",name:"SalesSync",    color:"#C4B5FD",glow:"rgba(124,58,237,.4)", bg:"rgba(124,58,237,.12)",border:"rgba(124,58,237,.35)",dot:"#9F67FF",short:"Automatic sales notes",   desc:"Every time a sale closes, it automatically registers in your system. Your team stops typing and sells more.",result:"−15min per sale",        tech:"n8n · CRM · API"},
-      {icon:"🏥",name:"ClinicBot",    color:"#67E8F9",glow:"rgba(6,182,212,.38)",bg:"rgba(6,182,212,.1)",  border:"rgba(6,182,212,.3)", dot:"#06B6D4",short:"24/7 WhatsApp Agent",     desc:"Handles patients on WhatsApp around the clock — books, confirms and sends reminders automatically.",      result:"24/7 no receptionist",  tech:"WhatsApp API · Claude AI · n8n"},
-      {icon:"🔧",name:"FieldBot",     color:"#86efac",glow:"rgba(34,197,94,.32)", bg:"rgba(34,197,94,.08)",border:"rgba(34,197,94,.25)",  dot:"#22c55e",short:"Visit scheduling",     desc:"Receives request, qualifies service, checks availability and confirms appointment. All automatic.",         result:"3min from request to calendar",tech:"WhatsApp API · n8n · Calendar"},
-      {icon:"💡",name:"Your Project", color:"#fde68a",glow:"rgba(251,191,36,.25)",bg:"rgba(251,191,36,.08)",border:"rgba(251,191,36,.22)",dot:"#fbbf24",short:"Custom solution",       desc:"Have a different problem? We design a solution from scratch tailored to your specific process.",            result:"Free diagnosis",         tech:"Custom stack"},
+      {icon:"📊",name:"VendaSync",    color:"#C4B5FD",glow:"rgba(124,58,237,.4)", bg:"rgba(124,58,237,.12)",border:"rgba(124,58,237,.35)",dot:"#9F67FF",short:"Automatic sales posting",   desc:"Every time a sale closes, it automatically registers in your system. End of manual data entry.",result:"−15min per sale",        tech:"n8n · CRM · ERP"},
+      {icon:"💬",name:"SmartBot",     color:"#67E8F9",glow:"rgba(6,182,212,.38)",bg:"rgba(6,182,212,.1)",  border:"rgba(6,182,212,.3)", dot:"#06B6D4",short:"WhatsApp Agent",     desc:"Smart 24/7 support. Qualifies leads, books meetings and answers FAQs automatically.",      result:"24/7 without resting",  tech:"WhatsApp API · Claude AI · n8n"},
+      {icon:"📋",name:"TeamReport",   color:"#86efac",glow:"rgba(34,197,94,.32)", bg:"rgba(34,197,94,.08)",border:"rgba(34,197,94,.25)",  dot:"#22c55e",short:"Employee Reports",     desc:"Gathers data from each employee and generates consolidated management reports in seconds.",         result:"Data-driven management",tech:"Internal APIs · n8n · Claude"},
+      {icon:"💡",name:"Your Project", color:"#fde68a",glow:"rgba(251,191,36,.25)",bg:"rgba(251,191,36,.08)",border:"rgba(251,191,36,.22)",dot:"#fbbf24",short:"Custom solution",       desc:"Have another bottleneck? We design an automation from scratch tailored to your specific process.",            result:"Free diagnosis",         tech:"Custom stack"},
     ],
   }
 };
@@ -398,7 +398,8 @@ function onScroll(){
   const ti=document.getElementById('trans-inner');
   if(trP>.05){ti.classList.add('show','from-scale');}else{ti.classList.remove('show');countersStarted=false;}
   if(trP>.3)startCounters();
-  document.getElementById('tools-row').style.display=trP>.65?'flex':'none';
+  const toolsRow = document.getElementById('tools-row');
+  if(toolsRow) toolsRow.style.display=trP>.65?'flex':'none';
 
   // ── SCENE 4: PRODUCTS ──
   const pdi=document.getElementById('prod-inner');
