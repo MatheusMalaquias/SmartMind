@@ -34,8 +34,8 @@ const T = {
     ctas:"Sua empresa já poderia estar automatizada. Dá o primeiro passo.",
     fn:"Nome *",fw:"WhatsApp *",fq:"O que você precisa?",fsel:"Selecione",
     opts:["🤖 Agente de WhatsApp","⚙️ Automação de processo","🔗 Integração de sistemas","📊 Inteligência de dados","💡 Quero conversar"],
-    fbtn:"Quero uma Proposta Gratuita",
-    ot:"Recebido.",
+    fbtn:"Quero uma Proposta Gratuita",fdis:"Sem spam. Resposta em até 1 dia útil.",
+    ot:"Recebido.",os:"Retornamos com uma proposta em até 1 dia útil.",
     foot:"© "+new Date().getFullYear()+" Synaptech | AI Automation & Business Intelligence | Matheus O. Malaquias",
     pl:[
       {icon:"📊",name:"SalesSync",  color:"#C4B5FD",glow:"rgba(124,58,237,.4)", bg:"rgba(124,58,237,.12)",border:"rgba(124,58,237,.35)",dot:"#9F67FF",short:"Notas de venda automáticas",  desc:"A cada venda fechada, registra automaticamente no seu sistema. Sua equipe para de digitar e começa a vender mais.",result:"−15min por venda",       tech:"n8n · CRM · API"},
@@ -71,8 +71,8 @@ const T = {
     ctas:"Your business could already be automated. Take the first step.",
     fn:"Name *",fw:"WhatsApp *",fq:"What do you need?",fsel:"Select",
     opts:["🤖 WhatsApp Agent","⚙️ Process Automation","🔗 System Integration","📊 Data Intelligence","💡 I want to talk"],
-    fbtn:"Get a Free Proposal",
-    ot:"Received.",
+    fbtn:"Get a Free Proposal",fdis:"No spam. Response within 1 business day.",
+    ot:"Received.",os:"We'll come back with a proposal within 1 business day.",
     foot:"© "+new Date().getFullYear()+" Synaptech | AI Automation & Business Intelligence | Matheus O. Malaquias",
     pl:[
       {icon:"📊",name:"SalesSync",    color:"#C4B5FD",glow:"rgba(124,58,237,.4)", bg:"rgba(124,58,237,.12)",border:"rgba(124,58,237,.35)",dot:"#9F67FF",short:"Automatic sales notes",   desc:"Every time a sale closes, it automatically registers in your system. Your team stops typing and sells more.",result:"−15min per sale",        tech:"n8n · CRM · API"},
