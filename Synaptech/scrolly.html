@@ -342,8 +342,8 @@ const T = {
     ctas:"Sua empresa já poderia estar automatizada. Dá o primeiro passo.",
     fn:"Nome *",fw:"WhatsApp *",fq:"O que você precisa?",fsel:"Selecione",
     opts:["🤖 Agente de WhatsApp","⚙️ Automação de processo","🔗 Integração de sistemas","📊 Inteligência de dados","💡 Quero conversar"],
-    fbtn:"Quero uma Proposta Gratuita",fdis:"Sem spam. Resposta em até 1 dia útil.",
-    ot:"Recebido.",os:"Retornamos com uma proposta em até 1 dia útil.",
+    fbtn:"Quero uma Proposta Gratuita",
+    ot:"Recebido.",
     foot:"© "+new Date().getFullYear()+" Synaptech | AI Automation & Business Intelligence | Matheus O. Malaquias",
     pl:[
       {icon:"📊",name:"SalesSync",  color:"#C4B5FD",glow:"rgba(124,58,237,.4)", bg:"rgba(124,58,237,.12)",border:"rgba(124,58,237,.35)",dot:"#9F67FF",short:"Notas de venda automáticas",  desc:"A cada venda fechada, registra automaticamente no seu sistema. Sua equipe para de digitar e começa a vender mais.",result:"−15min por venda",       tech:"n8n · CRM · API"},
@@ -379,8 +379,8 @@ const T = {
     ctas:"Your business could already be automated. Take the first step.",
     fn:"Name *",fw:"WhatsApp *",fq:"What do you need?",fsel:"Select",
     opts:["🤖 WhatsApp Agent","⚙️ Process Automation","🔗 System Integration","📊 Data Intelligence","💡 I want to talk"],
-    fbtn:"Get a Free Proposal",fdis:"No spam. Response within 1 business day.",
-    ot:"Received.",os:"We'll come back with a proposal within 1 business day.",
+    fbtn:"Get a Free Proposal",
+    ot:"Received.",
     foot:"© "+new Date().getFullYear()+" Synaptech | AI Automation & Business Intelligence | Matheus O. Malaquias",
     pl:[
       {icon:"📊",name:"SalesSync",    color:"#C4B5FD",glow:"rgba(124,58,237,.4)", bg:"rgba(124,58,237,.12)",border:"rgba(124,58,237,.35)",dot:"#9F67FF",short:"Automatic sales notes",   desc:"Every time a sale closes, it automatically registers in your system. Your team stops typing and sells more.",result:"−15min per sale",        tech:"n8n · CRM · API"},
@@ -730,55 +730,112 @@ function onScroll(){
   if(ctP>.05)cti.classList.add('show','from-bottom');else cti.classList.remove('show');
 }
 
-// ══════════════════════════════════
-// FORM
-// ══════════════════════════════════
-function submitForm(){
-  const name=document.getElementById('inp-name').value.trim();
-  const wpp=document.getElementById('inp-wpp').value.trim();
-  const need=document.getElementById('inp-need').value;
-  if(!name||!wpp||!need)return;
+// ══════════════════════════════════════════
+// FORM HANDLING
+// ══════════════════════════════════════════
+function submitForm(e, formId) {
+  e.preventDefault();
 
-  const btn=document.getElementById('submit-btn');
-  btn.disabled=true;
-  btn.textContent='⏳ Enviando...';
+  const form = document.getElementById('form-' + formId);
+  const success = document.getElementById('success-' + formId);
+  const btn = form.querySelector('button[type="submit"]');
 
-  fetch('https://n8n-yvdu.srv1552695.hstgr.cloud/webhook/synaptech',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      nome:name,
-      whatsapp:wpp,
-      solucao:need,
-      origem:'landing_scrollytelling',
-      pagina:window.location.href,
-      data:new Date().toISOString(),
-    }),
+  // Dados do formulário
+  const nome = form.querySelector('[name="nome"]').value.trim();
+  const wpp = form.querySelector('[name="whatsapp"]').value.trim();
+  const sol = form.querySelector('[name="solucao"]').value;
+
+  // Validação
+  if (!nome || !wpp || !sol) return;
+
+  // ══════════════════════════════════════════
+  // WHATSAPP
+  // ══════════════════════════════════════════
+
+  const mensagem = `Olá! Me chamo ${nome} e gostaria de saber mais sobre ${sol}.`;
+
+  const mensagemWhatsApp = encodeURIComponent(mensagem);
+
+  const whatsappUrl =
+    'https://wa.me/5532987167907?text=' + mensagemWhatsApp;
+
+  // Abre imediatamente para evitar bloqueio de popup
+  window.open(whatsappUrl, '_blank');
+
+  // ══════════════════════════════════════════
+  // LOADING
+  // ══════════════════════════════════════════
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  // ══════════════════════════════════════════
+  // ENVIA LEAD PARA O N8N
+  // ══════════════════════════════════════════
+
+  fetch('https://n8n-yvdu.srv1552695.hstgr.cloud/webhook/synaptech', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nome,
+      whatsapp: wpp,
+      solucao: sol,
+      origem: formId === 'top'
+        ? 'formulario_topo'
+        : 'formulario_final',
+      pagina: window.location.href,
+      data: new Date().toISOString()
+    })
   })
-  .catch(()=>{
-    setTimeout(()=>{
-      fetch('https://n8n-yvdu.srv1552695.hstgr.cloud/webhook/synaptech',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({nome:name,whatsapp:wpp,solucao:need,origem:'landing_scrollytelling',retry:true}),
-      }).catch(()=>{});
-    },3000);
-  })
-  .finally(()=>{
-    if(typeof fbq!=='undefined')fbq('track','Lead',{content_name:need});
-    document.getElementById('form-box').style.display='none';
-    document.getElementById('success-box').style.display='flex';
+  .then(res => {
+    if (!res.ok) {
+      throw new Error('Erro ' + res.status);
+    }
 
+    // Meta Pixel
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', {
+        content_name: sol
+      });
+    }
+
+    // Mostra sucesso
+    form.style.display = 'none';
+    success.style.display = 'flex';
+  })
+  .catch(() => {
+
+    // Mesmo se o n8n falhar,
+    // o WhatsApp já foi aberto.
+
+    form.style.display = 'none';
+    success.style.display = 'flex';
+
+    // Tenta enviar novamente ao n8n
+    setTimeout(() => {
+
+      fetch('https://n8n-yvdu.srv1552695.hstgr.cloud/webhook/synaptech', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          nome,
+          whatsapp: wpp,
+          solucao: sol,
+          origem: formId === 'top'
+            ? 'formulario_topo'
+            : 'formulario_final',
+          pagina: window.location.href,
+          data: new Date().toISOString(),
+          retry: true
+        })
+      }).catch(() => {});
+
+    }, 3000);
   });
-}
-
-// Update button state
-['inp-name','inp-wpp','inp-need'].forEach(id=>{
-  document.getElementById(id).addEventListener('input',updateBtn);
-  document.getElementById(id).addEventListener('change',updateBtn);
-});
-function updateBtn(){
-  const ok=document.getElementById('inp-name').value.trim()&&document.getElementById('inp-wpp').value.trim()&&document.getElementById('inp-need').value;
-  document.getElementById('submit-btn').classList.toggle('ready',!!ok);
 }
 
 // ══════════════════════════════════
