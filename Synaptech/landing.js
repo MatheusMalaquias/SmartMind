@@ -266,15 +266,7 @@ function submitForm(e, formId) {
       }).catch(() => {});
     }, 3000);
   })
-  .finally(() => {
-    // Abre WhatsApp do cliente com mensagem pré-preenchida
-    const msg = encodeURIComponent(
-      'Olá! Me chamo ' + nome + ' e tenho interesse em: ' + sol + '. Pode me ajudar?'
-    );
-    setTimeout(() => {
-      window.open('https://wa.me/5532987167907?text=' + msg, '_blank');
-    }, 1500);
-  });
+;
 }
 
 // ══════════════════════════════════════════

@@ -459,13 +459,7 @@ function submitForm(){
     if(typeof fbq!=='undefined')fbq('track','Lead',{content_name:need});
     document.getElementById('form-box').style.display='none';
     document.getElementById('success-box').style.display='flex';
-    // Abre WhatsApp do cliente com mensagem pré-preenchida
-    const msg = encodeURIComponent(
-      'Olá! Me chamo ' + name + ' e tenho interesse em: ' + need + '. Pode me ajudar?'
-    );
-    setTimeout(()=>{
-      window.open('https://wa.me/5532987167907?text=' + msg, '_blank');
-    }, 1500);
+
   });
 }
 
