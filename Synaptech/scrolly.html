@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Synaptech — Automatizamos o Trabalho Que Sua Equipe Não Deveria Estar Fazendo</title>
-<meta name="description" content="Agentes de WhatsApp, automações de processo e integrações inteligentes — construídos para o seu negócio em dias, não meses.">
+<meta name="description" content="Agentes de WhatsApp, automações de processo e integrações inteligentes — construídos para simplificar sua operação.">
 <meta property="og:title" content="Synaptech — AI Automation">
 <meta property="og:description" content="Automatizamos o trabalho que sua equipe não deveria estar fazendo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -292,7 +292,7 @@ footer{position:relative;z-index:10;text-align:center;padding:1.25rem;font-size:
                 <option value=""></option>
               </select>
             </div>
-            <button id="submit-btn" onclick="submitForm()"></button>
+            <button type="button" id="submit-btn" onclick="submitForm()"></button>
             <div class="form-disc" id="form-disc"></div>
           </div>
           <div class="success-box" id="success-box">
@@ -328,7 +328,7 @@ const T = {
     s1:"−15min",s1l:"eliminados por venda",
     s2:"24/7",  s2l:"atendimento sem parar",
     s3:"3min",  s3l:"do pedido ao calendário",
-    prods:"Três sistemas. Prontos para entrar em produção.",
+    prods:"Três sistemas. Prontos para transformar sua operação.",
     hint:"💡 Passe o mouse para ver detalhes",
     ct:"Veja ao vivo.",
     cs:"Uma conversa real com o ClinicBot. O paciente agenda, confirma e recebe lembrete — sem ninguém da sua equipe tocar em nada.",
@@ -341,7 +341,7 @@ const T = {
     ctat:"Você chegou até aqui.",
     ctas:"Sua empresa já poderia estar automatizada. Dá o primeiro passo.",
     fn:"Nome *",fw:"WhatsApp *",fq:"O que você precisa?",fsel:"Selecione",
-    opts:["🤖 Agente de WhatsApp","⚙️ Automação de processo","🔗 Integração de sistemas","📊 Inteligência de dados","💡 Quero conversar"],
+    opts:["Agente de WhatsApp","Automação de processo","Integração de sistemas","Inteligência de dados","Quero conversar"],
     fbtn:"Quero uma Proposta Gratuita",
     ot:"Recebido.",
     foot:"© "+new Date().getFullYear()+" Synaptech | AI Automation & Business Intelligence | Matheus O. Malaquias",
@@ -365,7 +365,7 @@ const T = {
     s1:"−15min",s1l:"eliminated per sale",
     s2:"24/7",  s2l:"non-stop support",
     s3:"3min",  s3l:"from request to calendar",
-    prods:"Three systems. Ready to go live.",
+    prods:"Three systems. Ready to transform your operation.",
     hint:"💡 Hover to see details",
     ct:"See it live.",
     cs:"A real conversation with ClinicBot. The patient books, confirms, gets a reminder — without anyone on your team lifting a finger.",
@@ -378,7 +378,7 @@ const T = {
     ctat:"You made it here.",
     ctas:"Your business could already be automated. Take the first step.",
     fn:"Name *",fw:"WhatsApp *",fq:"What do you need?",fsel:"Select",
-    opts:["🤖 WhatsApp Agent","⚙️ Process Automation","🔗 System Integration","📊 Data Intelligence","💡 I want to talk"],
+    opts:["WhatsApp Agent","Process Automation","System Integration","Data Intelligence","I want to talk"],
     fbtn:"Get a Free Proposal",
     ot:"Received.",
     foot:"© "+new Date().getFullYear()+" Synaptech | AI Automation & Business Intelligence | Matheus O. Malaquias",
@@ -733,107 +733,89 @@ function onScroll(){
 // ══════════════════════════════════════════
 // FORM HANDLING
 // ══════════════════════════════════════════
-function submitForm(e, formId) {
-  e.preventDefault();
+function submitForm() {
+  const nomeInput = document.getElementById('inp-name');
+  const wppInput = document.getElementById('inp-wpp');
+  const needInput = document.getElementById('inp-need');
+  const btn = document.getElementById('submit-btn');
 
-  const form = document.getElementById('form-' + formId);
-  const success = document.getElementById('success-' + formId);
-  const btn = form.querySelector('button[type="submit"]');
-
-  // Dados do formulário
-  const nome = form.querySelector('[name="nome"]').value.trim();
-  const wpp = form.querySelector('[name="whatsapp"]').value.trim();
-  const sol = form.querySelector('[name="solucao"]').value;
+  const nome = nomeInput.value.trim();
+  const wpp = wppInput.value.trim();
+  const sol = needInput.value.trim();
 
   // Validação
-  if (!nome || !wpp || !sol) return;
+  if (!nome || !wpp || !sol) {
+    if (!nome) nomeInput.focus();
+    else if (!wpp) wppInput.focus();
+    else needInput.focus();
+    return;
+  }
 
-  // ══════════════════════════════════════════
-  // WHATSAPP
-  // ══════════════════════════════════════════
-
-  const mensagem = `Olá! Me chamo ${nome} e gostaria de saber mais sobre ${sol}.`;
-
-  const mensagemWhatsApp = encodeURIComponent(mensagem);
+  // Mensagem que será aberta no WhatsApp
+  const mensagem =
+    `Olá! Me chamo ${nome} e gostaria de saber mais sobre ${sol.toLowerCase()}. Poderiam me ajudar?`;
 
   const whatsappUrl =
-    'https://wa.me/5532987167907?text=' + mensagemWhatsApp;
+    'https://wa.me/5532987167907?text=' + encodeURIComponent(mensagem);
 
-  // Abre imediatamente para evitar bloqueio de popup
-  window.open(whatsappUrl, '_blank');
+  // Abre o WhatsApp imediatamente ao clicar.
+  // Isso evita bloqueio de popup pelo navegador.
+  const whatsappWindow = window.open(whatsappUrl, '_blank');
 
-  // ══════════════════════════════════════════
-  // LOADING
-  // ══════════════════════════════════════════
+  // Caso o navegador bloqueie a nova aba, tenta navegar na mesma aba.
+  if (!whatsappWindow) {
+    window.location.href = whatsappUrl;
+  }
 
+  // Envia o lead para o n8n em segundo plano.
   btn.disabled = true;
   btn.textContent = 'Enviando...';
 
-  // ══════════════════════════════════════════
-  // ENVIA LEAD PARA O N8N
-  // ══════════════════════════════════════════
+  const leadData = {
+    nome: nome,
+    whatsapp: wpp,
+    solucao: sol,
+    origem: 'formulario_final',
+    pagina: window.location.href,
+    data: new Date().toISOString()
+  };
 
   fetch('https://n8n-yvdu.srv1552695.hstgr.cloud/webhook/synaptech', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      nome,
-      whatsapp: wpp,
-      solucao: sol,
-      origem: formId === 'top'
-        ? 'formulario_topo'
-        : 'formulario_final',
-      pagina: window.location.href,
-      data: new Date().toISOString()
-    })
+    body: JSON.stringify(leadData)
   })
   .then(res => {
-    if (!res.ok) {
-      throw new Error('Erro ' + res.status);
-    }
+    if (!res.ok) throw new Error('Erro ' + res.status);
 
-    // Meta Pixel
     if (typeof fbq !== 'undefined') {
       fbq('track', 'Lead', {
         content_name: sol
       });
     }
 
-    // Mostra sucesso
-    form.style.display = 'none';
-    success.style.display = 'flex';
+    document.getElementById('form-box').style.display = 'none';
+    document.getElementById('success-box').style.display = 'flex';
   })
   .catch(() => {
+    // O WhatsApp já foi aberto, então o lead não é perdido.
+    document.getElementById('form-box').style.display = 'none';
+    document.getElementById('success-box').style.display = 'flex';
 
-    // Mesmo se o n8n falhar,
-    // o WhatsApp já foi aberto.
-
-    form.style.display = 'none';
-    success.style.display = 'flex';
-
-    // Tenta enviar novamente ao n8n
+    // Retry do n8n
     setTimeout(() => {
-
       fetch('https://n8n-yvdu.srv1552695.hstgr.cloud/webhook/synaptech', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          nome,
-          whatsapp: wpp,
-          solucao: sol,
-          origem: formId === 'top'
-            ? 'formulario_topo'
-            : 'formulario_final',
-          pagina: window.location.href,
-          data: new Date().toISOString(),
+          ...leadData,
           retry: true
         })
       }).catch(() => {});
-
     }, 3000);
   });
 }
