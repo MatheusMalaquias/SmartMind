@@ -753,7 +753,9 @@ function submitForm() {
 
   // Mensagem que será aberta no WhatsApp
   const mensagem =
-    `Olá! Me chamo ${nome} e gostaria de saber mais sobre ${sol.toLowerCase()}. Poderiam me ajudar?`;
+  `Olá! Me chamo ${nome}
+  
+Gostaria de saber mais sobre ${sol.toLowerCase()}`;
 
   const whatsappUrl =
     'https://wa.me/5532987167907?text=' + encodeURIComponent(mensagem);
